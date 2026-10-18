@@ -2,15 +2,15 @@
   index.html
   Apostila de HTML — organizado para leitura e PDF
   Autor: João Paulo Duque
-  Atualização: 2026-10-18 — separa CSS/JS em assets, adiciona TOC, skip-link, capítulos colapsáveis e instruções para gerar PDF (workflow incluso).
+  Atualização: 2026-10-18 — normalização, revisão ortográfica e organização das folhas
 -->
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Apostila de HTML — Versão Completa | João Paulo Duque</title>
-  <meta name="description" content="Apostila completa de HTML criada por João Paulo Duque. Conteúdo didático, exemplos, exercícios e versão para impressão/PDF." />
+  <title>Apostila de HTML — João Paulo Duque</title>
+  <meta name="description" content="Apostila de HTML para iniciantes com exemplos, exercícios e instruções para gerar PDF." />
 
   <link rel="stylesheet" href="assets/styles.css">
   <script src="assets/script.js" defer></script>
@@ -22,15 +22,15 @@
       <div class="brand">
         <div class="logo" aria-hidden="true">JP</div>
         <div>
-          <h1>Apostila completa de HTML — João Paulo Duque</h1>
+          <h1>Apostila de HTML — João Paulo Duque</h1>
           <p class="lead">Versão didática com exemplos, exercícios e orientações para impressão/PDF.</p>
         </div>
       </div>
 
       <div class="tools no-print" role="toolbar" aria-label="Ferramentas">
-        <button id="btn-pdf" class="btn primary">Baixar / Imprimir PDF</button>
-        <a class="btn" href="#exercicios">Ir para exercícios</a>
-        <a class="btn" href="#referencias">Referências</a>
+        <button id="btn-pdf" class="button primary">Baixar / Imprimir PDF</button>
+        <a class="button" href="#exercicios">Ir para exercícios</a>
+        <a class="button" href="#referencias">Referências</a>
       </div>
     </header>
 
@@ -52,40 +52,28 @@
         </ul>
       </nav>
 
-      <!-- PDF instructions -->
       <section class="chapter" id="como-gerar-pdf">
         <h2>Como gerar PDF</h2>
-        <p>Você pode salvar esta apostila em PDF usando o navegador ou automaticamente via um workflow (arquivo .github/workflows/generate-pdf.yml).</p>
+        <p>Você pode salvar esta apostila em PDF usando o navegador ou automaticamente via um workflow (arquivo <code>.github/workflows/generate-pdf.yml</code>).</p>
         <ul>
-          <li><strong>Método manual (recomendado):</strong> Abra o navegador → Menu → Imprimir → Salvar como PDF. Ajuste margens para "Padrão" e marque "Imprimir planos de fundo" para preservar cores.</li>
-          <li><strong>Método automático (CI):</strong> O repositório contém um workflow GitHub Actions que gera apostila.pdf usando Puppeteer e disponibiliza como artefato.</li>
+          <li><strong>Método manual (recomendado):</strong> Abra o navegador → Menu → Imprimir → Salvar como PDF. Ajuste margens e marque "Imprimir planos de fundo" se quiser incluir cores e imagens de fundo.</li>
+          <li><strong>Método automático (CI):</strong> O repositório pode usar um workflow GitHub Actions que gera <code>apostila.pdf</code> usando Puppeteer e disponibiliza como artefato.</li>
         </ul>
-
-        <details>
-          <summary><strong>Comando rápido (linha de comando)</strong></summary>
-          <pre class="code"># Requer node e npm
-npm install -g http-server puppeteer
-# iniciar servidor na pasta do repositório
-http-server -p 8080 &amp;
-# gerar PDF com Node + Puppeteer (exemplo simples)
-node -e "const p=require('puppeteer');(async()=>{const b=await p.launch({args:['--no-sandbox']});const page=await b.newPage();await page.goto('http://127.0.0.1:8080',{waitUntil:'networkidle0'});await page.pdf({path:'apostila.pdf',format:'A4',printBackground:true});await b.close();})();"
-          </pre>
-        </details>
       </section>
 
-      <!-- Chapters (collapsible on screen; expanded for print) -->
+      <!-- Chapters -->
 
       <details class="chapter" open>
         <summary><h2>Introdução</h2></summary>
         <div class="chapter-content" id="introducao">
-          <p>Esta apostila foi criada para iniciantes que querem compreender a estrutura do HTML e praticar com exemplos. Ela reúne explicações teóricas, exemplos práticos, exercícios comentados e instruções para gerar uma versão em PDF ou impressão, com foco em semântica e acessibilidade.</p>
+          <p>Esta apostila foi criada para iniciantes que querem compreender a estrutura do HTML e praticar com exemplos. Reúne explicações teóricas, exemplos práticos e exercícios com soluções comentadas.</p>
         </div>
       </details>
 
       <details class="chapter">
         <summary><h2>Estrutura básica do HTML</h2></summary>
         <div class="chapter-content" id="estrutura">
-          <p>Todo documento HTML tem elementos essenciais: a declaração do doctype, a tag <code>&lt;html&gt;</code>, a seção <code>&lt;head&gt;</code> com metadados e a seção <code>&lt;body&gt;</code> com o conteúdo visível. Abaixo um exemplo mínimo:</p>
+          <p>Todo documento HTML tem elementos essenciais: a declaração do doctype, a tag <code>&lt;html&gt;</code>, a seção <code>&lt;head&gt;</code> com metadados e a seção <code>&lt;body&gt;</code> com o conteúdo visível.</p>
 
           <pre class="code">&lt;!DOCTYPE html&gt;
 &lt;html lang="pt-BR"&gt;
@@ -106,31 +94,31 @@ node -e "const p=require('puppeteer');(async()=>{const b=await p.launch({args:['
         <summary><h2>Tags importantes</h2></summary>
         <div class="chapter-content" id="tags">
           <h3>Títulos e parágrafos</h3>
-          <p>As tags <code>&lt;h1&gt;</code> até <code>&lt;h6&gt;</code> definem hierarquia de títulos. Use apenas um <code>&lt;h1&gt;</code> por página para o título principal e subsequentes para seções importantes.</p>
+          <p>As tags <code>&lt;h1&gt;</code> até <code>&lt;h6&gt;</code> definem a hierarquia de títulos. Use apenas um <code>&lt;h1&gt;</code> por página para o título principal.</p>
 
           <h3>Listas</h3>
-          <p>Listas ordenadas (<code>&lt;ol&gt;</code>) e não ordenadas (<code>&lt;ul&gt;</code>) são usadas para agrupar itens (<code>&lt;li&gt;</code>).</p>
+          <p>Listas ordenadas (<code>&lt;ol&gt;</code>) e não ordenadas (<code>&lt;ul&gt;</code>) agrupam itens (<code>&lt;li&gt;</code>).</p>
 
           <h3>Blocos semânticos</h3>
-          <p>Use <code>&lt;header&gt;</code>, <code>&lt;nav&gt;</code>, <code>&lt;main&gt;</code>, <code>&lt;section&gt;</code>, <code>&lt;article&gt;</code>, <code>&lt;aside&gt;</code> e <code>&lt;footer&gt;</code> para estruturar o conteúdo de forma semântica — isso melhora a acessibilidade e o SEO.</p>
+          <p>Use <code>&lt;header&gt;</code>, <code>&lt;nav&gt;</code>, <code>&lt;main&gt;</code>, <code>&lt;section&gt;</code>, <code>&lt;article&gt;</code>, <code>&lt;aside&gt;</code> e <code>&lt;footer&gt;</code> para estruturar o documento.</p>
         </div>
       </details>
 
       <details class="chapter">
         <summary><h2>Imagens e mídia</h2></summary>
         <div class="chapter-content" id="imagens">
-          <p>A tag <code>&lt;img&gt;</code> insere imagens. Sempre inclua o atributo <code>alt</code> para acessibilidade e escolha formatos otimizados (jpeg, webp). Forneça dimensões quando possível para evitar mudanças de layout.</p>
+          <p>A tag <code>&lt;img&gt;</code> insere imagens. Sempre inclua o atributo <code>alt</code> para acessibilidade e escolha formatos otimizados (JPEG, WebP). Forneça dimensões quando possível para evitar layout shift.</p>
 
-          <pre class="code">&lt;img src="foto-apresentacao.jpeg" alt="João Paulo sorrindo" width="300" /&gt;</pre>
+          <pre class="code">&lt;img src="assets/img/foto-apresentacao.jpeg" alt="João Paulo sorrindo" width="300" /&gt;</pre>
 
-          <p>Para áudio e vídeo, use <code>&lt;audio&gt;</code> e <code>&lt;video&gt;</code> com controles e mensagem de fallback:</p>
+          <p>Para áudio e vídeo use <code>&lt;audio&gt;</code> e <code>&lt;video&gt;</code> com controles e mensagem de fallback:</p>
           <pre class="code">&lt;audio controls&gt;
-  &lt;source src="audio.mp3" type="audio/mpeg"&gt;
+  &lt;source src="assets/media/audio.mp3" type="audio/mpeg"&gt;
   Seu navegador não suporta o elemento audio.
 &lt;/audio&gt;
 
-&lt;video controls width="480" poster="poster.jpg"&gt;
-  &lt;source src="video.mp4" type="video/mp4"&gt;
+&lt;video controls width="480" poster="assets/img/poster.jpg"&gt;
+  &lt;source src="assets/media/video.mp4" type="video/mp4"&gt;
   Seu navegador não suporta o elemento video.
 &lt;/video&gt;</pre>
         </div>
@@ -139,7 +127,7 @@ node -e "const p=require('puppeteer');(async()=>{const b=await p.launch({args:['
       <details class="chapter">
         <summary><h2>Links e navegação</h2></summary>
         <div class="chapter-content" id="links">
-          <p>Links são criados com <code>&lt;a&gt;</code>. Para abrir em nova aba, use <code>target="_blank"</code> e para segurança adicione <code>rel="noopener noreferrer"</code>. Para navegação interna use âncoras (hash).</p>
+          <p>Links são criados com <code>&lt;a&gt;</code>. Para abrir em nova aba use <code>target="_blank"</code> e, por segurança, adicione <code>rel="noopener noreferrer"</code>.</p>
           <pre class="code">&lt;a href="https://github.com/usuario" target="_blank" rel="noopener noreferrer"&gt;Meu GitHub&lt;/a&gt;</pre>
         </div>
       </details>
@@ -147,21 +135,19 @@ node -e "const p=require('puppeteer');(async()=>{const b=await p.launch({args:['
       <details class="chapter">
         <summary><h2>Formulários</h2></summary>
         <div class="chapter-content" id="formularios">
-          <p>Formulários permitem entrada de dados. Sempre valide no cliente e no servidor, use tipos de input apropriados e proteja contra CSRF.</p>
+          <p>Formulários permitem entrada de dados. Sempre valide no cliente e no servidor e proteja contra CSRF.</p>
           <pre class="code">&lt;form action="/enviar" method="post"&gt;
-  &lt;label&gt;Nome&lt;input type="text" name="nome" required&gt;&lt;/label&gt;
-  &lt;label&gt;Email&lt;input type="email" name="email" required&gt;&lt;/label&gt;
+  &lt;label&gt;Nome &lt;input type="text" name="nome" required&gt;&lt;/label&gt;
+  &lt;label&gt;Email &lt;input type="email" name="email" required&gt;&lt;/label&gt;
   &lt;button type="submit"&gt;Enviar&lt;/button&gt;
 &lt;/form&gt;</pre>
-
-          <p>Dicas: valide no cliente e servidor; proteja contra CSRF; não confie apenas em JavaScript.</p>
         </div>
       </details>
 
       <details class="chapter">
         <summary><h2>Semântica e acessibilidade</h2></summary>
         <div class="chapter-content" id="semantica">
-          <p>HTML semântico ajuda a SEO e leitores de tela. Use atributos ARIA quando necessário e sempre textos alternativos para imagens. Teste com leitores de tela e valide a ordem de foco.</p>
+          <p>HTML semântico ajuda SEO e leitores de tela. Use atributos ARIA quando necessário e textos alternativos para imagens. Teste com leitores de tela e verifique a ordem de foco.</p>
           <pre class="code">&lt;article&gt;
   &lt;h2&gt;Título do artigo&lt;/h2&gt;
   &lt;p&gt;Autor: João Paulo&lt;/p&gt;
@@ -172,13 +158,13 @@ node -e "const p=require('puppeteer');(async()=>{const b=await p.launch({args:['
 
       <details class="chapter">
         <summary><h2>Boas práticas</h2></summary>
-        <div class="chapter-content" id="boas-praticas">
+        <div class="chapter-content" id="boas_praticas">
           <ul>
-            <li>Use nomes de arquivos sem espaços e minúsculos (ex.: foto-apresentacao.jpeg).</li>
+            <li>Use nomes de arquivos sem espaços e em minúsculas (ex.: <code>foto-apresentacao.jpeg</code>).</li>
             <li>Forneça <code>alt</code> descritivo para imagens.</li>
             <li>Teste em diferentes tamanhos de tela (responsivo).</li>
             <li>Valide o HTML em <a href="https://validator.w3.org/" target="_blank" rel="noopener noreferrer">validator.w3.org</a>.</li>
-            <li>Minimize dependências externas e cuide de desempenho (compressão, lazy-loading).</li>
+            <li>Minimize dependências externas e cuide do desempenho (compressão, lazy-loading).</li>
           </ul>
         </div>
       </details>
@@ -198,7 +184,7 @@ node -e "const p=require('puppeteer');(async()=>{const b=await p.launch({args:['
 &lt;p&gt;Parágrafo 1&lt;/p&gt;
 &lt;p&gt;Parágrafo 2&lt;/p&gt;
 &lt;figure&gt;
-  &lt;img src="foto.jpg" alt="Descrição" width="300"&gt;
+  &lt;img src="assets/img/foto.jpg" alt="Descrição" width="300"&gt;
   &lt;figcaption&gt;Legenda da imagem&lt;/figcaption&gt;
 &lt;/figure&gt;</pre>
         </div>
@@ -216,7 +202,7 @@ node -e "const p=require('puppeteer');(async()=>{const b=await p.launch({args:['
       </details>
 
       <footer>
-        <p>&copy; 2026 — João Paulo Duque. Esta apostila é um material de estudo e pode ser adaptada e distribuída com créditos.</p>
+        <p>&copy; 2026 — João Paulo Duque. Material de estudo — pode ser adaptado e distribuído com créditos.</p>
       </footer>
     </main>
   </div>
