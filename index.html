@@ -1,8 +1,8 @@
 <!--
   index.html
-  Apostila de HTML — Versão completa (melhorias)
+  Apostila de HTML — organizado para leitura e PDF
   Autor: João Paulo Duque
-  Atualização: 2026-10-18 — Completa textos cortados, melhora semântica, acessibilidade, sumário com âncoras e ajustes de impressão/estilo.
+  Atualização: 2026-10-18 — separa CSS/JS em assets, adiciona TOC, skip-link, capítulos colapsáveis e instruções para gerar PDF (workflow incluso).
 -->
 <!DOCTYPE html>
 <html lang="pt-BR">
@@ -12,104 +12,32 @@
   <title>Apostila de HTML — Versão Completa | João Paulo Duque</title>
   <meta name="description" content="Apostila completa de HTML criada por João Paulo Duque. Conteúdo didático, exemplos, exercícios e versão para impressão/PDF." />
 
-  <style>
-    :root{
-      --bg:#0f1724; --card:#0b1220; --muted:#98a0b3; --text:#e6eef8; --accent:#6ea8fe;
-      --paper-bg:#ffffff; --paper-text:#0b1220;
-      --max-width:900px; --radius:10px;
-    }
-
-    *{box-sizing:border-box;margin:0;padding:0}
-    html,body{height:100%}
-    body{
-      font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, Arial, "Helvetica Neue", sans-serif;
-      background: linear-gradient(180deg,#071024 0%,#07122a 60%);
-      color:var(--text); padding:28px 18px; display:flex; justify-content:center;
-      -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale;
-    }
-
-    .container{width:100%;max-width:var(--max-width)}
-    header{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:18px}
-    .brand{display:flex;gap:12px;align-items:center}
-    .logo{width:56px;height:56px;border-radius:8px;background:linear-gradient(135deg,var(--accent),#3b82f6);display:flex;align-items:center;justify-content:center;color:#021026;font-weight:800}
-    h1{font-size:1.15rem}
-    p.lead{color:var(--muted);margin-top:4px}
-
-    .tools{display:flex;gap:8px}
-    .btn{background:transparent;border:1px solid rgba(255,255,255,0.06);color:var(--text);padding:8px 10px;border-radius:8px;text-decoration:none;cursor:pointer;font-size:0.95rem}
-    .btn.primary{background:linear-gradient(90deg,var(--accent),#4f7ef7);color:#021026;border:none}
-
-    /* Layout */
-    main{background:linear-gradient(180deg,rgba(255,255,255,0.01),rgba(255,255,255,0.02));padding:22px;border-radius:12px;border:1px solid rgba(255,255,255,0.03);box-shadow:0 12px 30px rgba(2,6,23,0.5)}
-    .chapter{background:transparent;padding:14px 0;border-bottom:1px dashed rgba(255,255,255,0.03)}
-    h2{color:var(--text);margin-bottom:8px}
-    h3{color:var(--accent);margin-top:12px}
-    p,li,code{color:var(--muted);margin:8px 0}
-    ul{margin-left:18px}
-
-    pre.code{background:#07122a;color:#cfe8ff;padding:12px;border-radius:8px;overflow:auto;border:1px solid rgba(255,255,255,0.03);white-space:pre}
-
-    footer{margin-top:18px;color:var(--muted);font-size:0.95rem;text-align:center}
-
-    /* Print styles (A4 friendly) */
-    @media print{
-      body{background:var(--paper-bg);color:var(--paper-text);padding:0}
-      .container{max-width:800px;margin:0 auto}
-      main{background:transparent;box-shadow:none;border:none;padding:0}
-      .logo{display:none}
-      .no-print{display:none}
-      a[href]:after{content:" (" attr(href) ")"}
-      pre.code{white-space:pre-wrap;word-break:break-word;border:none;background:transparent;padding:0}
-      .chapter{page-break-inside:avoid}
-      footer{display:block;position:fixed;bottom:0;left:0;right:0;padding:8px 40px;background:transparent;color:#444}
-      @page{size:A4;margin:20mm}
-    }
-
-    /* Responsive */
-    @media (max-width:900px){main{padding:18px}}
-    @media (max-width:600px){.logo{width:48px;height:48px}.tools{flex-wrap:wrap} h1{font-size:1rem}}
-  </style>
-
-  <script>
-    function downloadPDF(){
-      // Trigger browser print dialog. User can choose "Save as PDF".
-      window.print();
-    }
-
-    // Small helper to expand/collapse examples
-    function toggle(id){
-      const el = document.getElementById(id);
-      if(!el) return;
-      el.style.display = el.style.display === 'none' ? 'block' : 'none';
-    }
-  </script>
+  <link rel="stylesheet" href="assets/styles.css">
+  <script src="assets/script.js" defer></script>
 </head>
 <body>
+  <a class="skip-link" href="#main-content">Pular para o conteúdo</a>
   <div class="container">
     <header>
       <div class="brand">
         <div class="logo" aria-hidden="true">JP</div>
         <div>
           <h1>Apostila completa de HTML — João Paulo Duque</h1>
-          <p class="lead">Versão detalhada com exemplos, exercícios e versão para impressão/PDF.</p>
+          <p class="lead">Versão didática com exemplos, exercícios e orientações para impressão/PDF.</p>
         </div>
       </div>
 
       <div class="tools no-print" role="toolbar" aria-label="Ferramentas">
-        <button class="btn primary" onclick="downloadPDF()">Baixar / Imprimir PDF</button>
+        <button id="btn-pdf" class="btn primary">Baixar / Imprimir PDF</button>
         <a class="btn" href="#exercicios">Ir para exercícios</a>
         <a class="btn" href="#referencias">Referências</a>
       </div>
     </header>
 
-    <main role="main" aria-label="Conteúdo da apostila">
-      <section class="chapter" id="introducao">
-        <h2>Introdução</h2>
-        <p>Esta apostila foi criada para iniciantes que querem compreender a estrutura do HTML e praticar com exemplos. Ela reúne explicações teóricas, exemplos práticos, exercícios comentados e instruções para gerar uma versão em PDF ou impressão, com foco em boa semântica e acessibilidade.</p>
-      </section>
-
-      <section class="chapter" id="sumario">
-        <h2>Sumário</h2>
+    <main id="main-content" role="main" aria-label="Conteúdo da apostila">
+      <!-- TOC -->
+      <nav class="toc" aria-label="Sumário">
+        <strong>Sumário</strong>
         <ul>
           <li><a href="#introducao">1. Introdução</a></li>
           <li><a href="#estrutura">2. Estrutura básica do HTML</a></li>
@@ -122,13 +50,44 @@
           <li><a href="#exercicios">9. Exercícios e soluções</a></li>
           <li><a href="#referencias">10. Referências</a></li>
         </ul>
+      </nav>
+
+      <!-- PDF instructions -->
+      <section class="chapter" id="como-gerar-pdf">
+        <h2>Como gerar PDF</h2>
+        <p>Você pode salvar esta apostila em PDF usando o navegador ou automaticamente via um workflow (arquivo .github/workflows/generate-pdf.yml).</p>
+        <ul>
+          <li><strong>Método manual (recomendado):</strong> Abra o navegador → Menu → Imprimir → Salvar como PDF. Ajuste margens para "Padrão" e marque "Imprimir planos de fundo" para preservar cores.</li>
+          <li><strong>Método automático (CI):</strong> O repositório contém um workflow GitHub Actions que gera apostila.pdf usando Puppeteer e disponibiliza como artefato.</li>
+        </ul>
+
+        <details>
+          <summary><strong>Comando rápido (linha de comando)</strong></summary>
+          <pre class="code"># Requer node e npm
+npm install -g http-server puppeteer
+# iniciar servidor na pasta do repositório
+http-server -p 8080 &amp;
+# gerar PDF com Node + Puppeteer (exemplo simples)
+node -e "const p=require('puppeteer');(async()=>{const b=await p.launch({args:['--no-sandbox']});const page=await b.newPage();await page.goto('http://127.0.0.1:8080',{waitUntil:'networkidle0'});await page.pdf({path:'apostila.pdf',format:'A4',printBackground:true});await b.close();})();"
+          </pre>
+        </details>
       </section>
 
-      <section class="chapter" id="estrutura">
-        <h2>Estrutura básica do HTML</h2>
-        <p>Todo documento HTML tem elementos essenciais: a declaração do doctype, a tag <code>&lt;html&gt;</code>, a seção <code>&lt;head&gt;</code> com metadados e a seção <code>&lt;body&gt;</code> com o conteúdo visível. Abaixo um exemplo mínimo:</p>
+      <!-- Chapters (collapsible on screen; expanded for print) -->
 
-        <pre class="code">&lt;!DOCTYPE html&gt;
+      <details class="chapter" open>
+        <summary><h2>Introdução</h2></summary>
+        <div class="chapter-content" id="introducao">
+          <p>Esta apostila foi criada para iniciantes que querem compreender a estrutura do HTML e praticar com exemplos. Ela reúne explicações teóricas, exemplos práticos, exercícios comentados e instruções para gerar uma versão em PDF ou impressão, com foco em semântica e acessibilidade.</p>
+        </div>
+      </details>
+
+      <details class="chapter">
+        <summary><h2>Estrutura básica do HTML</h2></summary>
+        <div class="chapter-content" id="estrutura">
+          <p>Todo documento HTML tem elementos essenciais: a declaração do doctype, a tag <code>&lt;html&gt;</code>, a seção <code>&lt;head&gt;</code> com metadados e a seção <code>&lt;body&gt;</code> com o conteúdo visível. Abaixo um exemplo mínimo:</p>
+
+          <pre class="code">&lt;!DOCTYPE html&gt;
 &lt;html lang="pt-BR"&gt;
   &lt;head&gt;
     &lt;meta charset="utf-8"&gt;
@@ -139,30 +98,33 @@
     &lt;h1&gt;Olá Mundo&lt;/h1&gt;
     &lt;p&gt;Meu primeiro parágrafo.&lt;/p&gt;
   &lt;/body&gt;
-&lt;/html&gt;
-        </pre>
-      </section>
+&lt;/html&gt;</pre>
+        </div>
+      </details>
 
-      <section class="chapter" id="tags">
-        <h2>Tags importantes</h2>
-        <h3>Títulos e parágrafos</h3>
-        <p>As tags <code>&lt;h1&gt;</code> até <code>&lt;h6&gt;</code> definem hierarquia de títulos. Use apenas um <code>&lt;h1&gt;</code> por página para o título principal e subsequentes para seções importantes.</p>
+      <details class="chapter">
+        <summary><h2>Tags importantes</h2></summary>
+        <div class="chapter-content" id="tags">
+          <h3>Títulos e parágrafos</h3>
+          <p>As tags <code>&lt;h1&gt;</code> até <code>&lt;h6&gt;</code> definem hierarquia de títulos. Use apenas um <code>&lt;h1&gt;</code> por página para o título principal e subsequentes para seções importantes.</p>
 
-        <h3>Listas</h3>
-        <p>Listas ordenadas (<code>&lt;ol&gt;</code>) e não ordenadas (<code>&lt;ul&gt;</code>) são usadas para agrupar itens (<code>&lt;li&gt;</code>).</p>
+          <h3>Listas</h3>
+          <p>Listas ordenadas (<code>&lt;ol&gt;</code>) e não ordenadas (<code>&lt;ul&gt;</code>) são usadas para agrupar itens (<code>&lt;li&gt;</code>).</p>
 
-        <h3>Blocos semânticos</h3>
-        <p>Use <code>&lt;header&gt;</code>, <code>&lt;nav&gt;</code>, <code>&lt;main&gt;</code>, <code>&lt;section&gt;</code>, <code>&lt;article&gt;</code>, <code>&lt;aside&gt;</code> e <code>&lt;footer&gt;</code> para estruturar o conteúdo de forma semântica — isso melhora a acessibilidade e o SEO.</p>
-      </section>
+          <h3>Blocos semânticos</h3>
+          <p>Use <code>&lt;header&gt;</code>, <code>&lt;nav&gt;</code>, <code>&lt;main&gt;</code>, <code>&lt;section&gt;</code>, <code>&lt;article&gt;</code>, <code>&lt;aside&gt;</code> e <code>&lt;footer&gt;</code> para estruturar o conteúdo de forma semântica — isso melhora a acessibilidade e o SEO.</p>
+        </div>
+      </details>
 
-      <section class="chapter" id="imagens">
-        <h2>Imagens e mídia</h2>
-        <p>A tag <code>&lt;img&gt;</code> insere imagens. Sempre inclua o atributo <code>alt</code> para acessibilidade e escolha formatos otimizados (jpeg, webp). Forneça dimensões quando possível para evitar mudanças de layout.</p>
+      <details class="chapter">
+        <summary><h2>Imagens e mídia</h2></summary>
+        <div class="chapter-content" id="imagens">
+          <p>A tag <code>&lt;img&gt;</code> insere imagens. Sempre inclua o atributo <code>alt</code> para acessibilidade e escolha formatos otimizados (jpeg, webp). Forneça dimensões quando possível para evitar mudanças de layout.</p>
 
-        <pre class="code">&lt;img src="foto-apresentacao.jpeg" alt="João Paulo sorrindo" width="300" /&gt;</pre>
+          <pre class="code">&lt;img src="foto-apresentacao.jpeg" alt="João Paulo sorrindo" width="300" /&gt;</pre>
 
-        <p>Para áudio e vídeo, use <code>&lt;audio&gt;</code> e <code>&lt;video&gt;</code> com controles:</p>
-        <pre class="code">&lt;audio controls&gt;
+          <p>Para áudio e vídeo, use <code>&lt;audio&gt;</code> e <code>&lt;video&gt;</code> com controles e mensagem de fallback:</p>
+          <pre class="code">&lt;audio controls&gt;
   &lt;source src="audio.mp3" type="audio/mpeg"&gt;
   Seu navegador não suporta o elemento audio.
 &lt;/audio&gt;
@@ -170,78 +132,88 @@
 &lt;video controls width="480" poster="poster.jpg"&gt;
   &lt;source src="video.mp4" type="video/mp4"&gt;
   Seu navegador não suporta o elemento video.
-&lt;/video&gt;
-        </pre>
-      </section>
+&lt;/video&gt;</pre>
+        </div>
+      </details>
 
-      <section class="chapter" id="links">
-        <h2>Links e navegação</h2>
-        <p>Links são criados com <code>&lt;a&gt;</code>. Para abrir em nova aba, use <code>target="_blank"</code> e para segurança adicione <code>rel="noopener noreferrer"</code>. Para navegação interna use âncoras (hash).</p>
-        <pre class="code">&lt;a href="https://github.com/usuario" target="_blank" rel="noopener noreferrer"&gt;Meu GitHub&lt;/a&gt;</pre>
-      </section>
+      <details class="chapter">
+        <summary><h2>Links e navegação</h2></summary>
+        <div class="chapter-content" id="links">
+          <p>Links são criados com <code>&lt;a&gt;</code>. Para abrir em nova aba, use <code>target="_blank"</code> e para segurança adicione <code>rel="noopener noreferrer"</code>. Para navegação interna use âncoras (hash).</p>
+          <pre class="code">&lt;a href="https://github.com/usuario" target="_blank" rel="noopener noreferrer"&gt;Meu GitHub&lt;/a&gt;</pre>
+        </div>
+      </details>
 
-      <section class="chapter" id="formularios">
-        <h2>Formulários</h2>
-        <p>Formulários permitem entrada de dados. Sempre valide no cliente e no servidor, use tipos de input apropriados e proteja contra CSRF.</p>
-        <pre class="code">&lt;form action="/enviar" method="post"&gt;
+      <details class="chapter">
+        <summary><h2>Formulários</h2></summary>
+        <div class="chapter-content" id="formularios">
+          <p>Formulários permitem entrada de dados. Sempre valide no cliente e no servidor, use tipos de input apropriados e proteja contra CSRF.</p>
+          <pre class="code">&lt;form action="/enviar" method="post"&gt;
   &lt;label&gt;Nome&lt;input type="text" name="nome" required&gt;&lt;/label&gt;
   &lt;label&gt;Email&lt;input type="email" name="email" required&gt;&lt;/label&gt;
   &lt;button type="submit"&gt;Enviar&lt;/button&gt;
-&lt;/form&gt;
-        </pre>
+&lt;/form&gt;</pre>
 
-        <p>Dicas: valide no cliente e servidor; proteja contra CSRF; não confie apenas em JavaScript.</p>
-      </section>
+          <p>Dicas: valide no cliente e servidor; proteja contra CSRF; não confie apenas em JavaScript.</p>
+        </div>
+      </details>
 
-      <section class="chapter" id="semantica">
-        <h2>Semântica e acessibilidade</h2>
-        <p>HTML semântico ajuda a SEO e leitores de tela. Use atributos ARIA quando necessário e sempre textos alternativos para imagens. Teste com leitores de tela e valide a ordem de foco.</p>
-        <p>Exemplo de um artigo com meta-informações:</p>
-        <pre class="code">&lt;article&gt;
+      <details class="chapter">
+        <summary><h2>Semântica e acessibilidade</h2></summary>
+        <div class="chapter-content" id="semantica">
+          <p>HTML semântico ajuda a SEO e leitores de tela. Use atributos ARIA quando necessário e sempre textos alternativos para imagens. Teste com leitores de tela e valide a ordem de foco.</p>
+          <pre class="code">&lt;article&gt;
   &lt;h2&gt;Título do artigo&lt;/h2&gt;
   &lt;p&gt;Autor: João Paulo&lt;/p&gt;
   &lt;p&gt;Conteúdo do artigo...&lt;/p&gt;
 &lt;/article&gt;</pre>
-      </section>
+        </div>
+      </details>
 
-      <section class="chapter" id="boas-praticas">
-        <h2>Boas práticas</h2>
-        <ul>
-          <li>Use nomes de arquivos sem espaços e minúsculos (ex.: foto-apresentacao.jpeg).</li>
-          <li>Forneça <code>alt</code> descritivo para imagens.</li>
-          <li>Teste em diferentes tamanhos de tela (responsivo).</li>
-          <li>Valide o HTML em <a href="https://validator.w3.org/" target="_blank" rel="noopener noreferrer">validator.w3.org</a>.</li>
-          <li>Minimize dependências externas e cuide de desempenho (compressão, lazy-loading).</li>
-        </ul>
-      </section>
+      <details class="chapter">
+        <summary><h2>Boas práticas</h2></summary>
+        <div class="chapter-content" id="boas-praticas">
+          <ul>
+            <li>Use nomes de arquivos sem espaços e minúsculos (ex.: foto-apresentacao.jpeg).</li>
+            <li>Forneça <code>alt</code> descritivo para imagens.</li>
+            <li>Teste em diferentes tamanhos de tela (responsivo).</li>
+            <li>Valide o HTML em <a href="https://validator.w3.org/" target="_blank" rel="noopener noreferrer">validator.w3.org</a>.</li>
+            <li>Minimize dependências externas e cuide de desempenho (compressão, lazy-loading).</li>
+          </ul>
+        </div>
+      </details>
 
-      <section class="chapter" id="exercicios">
-        <h2>Exercícios</h2>
-        <ol>
-          <li>Crie uma página com título, dois parágrafos e uma imagem com legenda.</li>
-          <li>Faça um formulário simples de contato com validação do tipo de input.</li>
-          <li>Monte uma pequena galeria de imagens com <code>&lt;figure&gt;</code> e <code>&lt;figcaption&gt;</code>.</li>
-        </ol>
+      <details class="chapter">
+        <summary><h2>Exercícios</h2></summary>
+        <div class="chapter-content" id="exercicios">
+          <ol>
+            <li>Crie uma página com título, dois parágrafos e uma imagem com legenda.</li>
+            <li>Faça um formulário simples de contato com validação do tipo de input.</li>
+            <li>Monte uma pequena galeria de imagens com <code>&lt;figure&gt;</code> e <code>&lt;figcaption&gt;</code>.</li>
+          </ol>
 
-        <h3>Soluções (resumidas)</h3>
-        <p id="solucao1"><strong>Ex.1</strong> — Estrutura mínima com imagem e legenda:</p>
-        <pre class="code">&lt;h1&gt;Minha página&lt;/h1&gt;
+          <h3>Soluções (resumidas)</h3>
+          <p id="solucao1"><strong>Ex.1</strong> — Estrutura mínima com imagem e legenda:</p>
+          <pre class="code">&lt;h1&gt;Minha página&lt;/h1&gt;
 &lt;p&gt;Parágrafo 1&lt;/p&gt;
 &lt;p&gt;Parágrafo 2&lt;/p&gt;
 &lt;figure&gt;
   &lt;img src="foto.jpg" alt="Descrição" width="300"&gt;
   &lt;figcaption&gt;Legenda da imagem&lt;/figcaption&gt;
 &lt;/figure&gt;</pre>
-      </section>
+        </div>
+      </details>
 
-      <section class="chapter" id="referencias">
-        <h2>Referências e leitura recomendada</h2>
-        <ul>
-          <li><a href="https://developer.mozilla.org/pt-BR/docs/Web/HTML" target="_blank" rel="noopener noreferrer">MDN — HTML (em português)</a></li>
-          <li><a href="https://validator.w3.org/" target="_blank" rel="noopener noreferrer">W3C Validator</a></li>
-          <li><a href="https://www.w3schools.com/html/" target="_blank" rel="noopener noreferrer">W3Schools — HTML</a></li>
-        </ul>
-      </section>
+      <details class="chapter">
+        <summary><h2>Referências e leitura recomendada</h2></summary>
+        <div class="chapter-content" id="referencias">
+          <ul>
+            <li><a href="https://developer.mozilla.org/pt-BR/docs/Web/HTML" target="_blank" rel="noopener noreferrer">MDN — HTML (em português)</a></li>
+            <li><a href="https://validator.w3.org/" target="_blank" rel="noopener noreferrer">W3C Validator</a></li>
+            <li><a href="https://www.w3schools.com/html/" target="_blank" rel="noopener noreferrer">W3Schools — HTML</a></li>
+          </ul>
+        </div>
+      </details>
 
       <footer>
         <p>&copy; 2026 — João Paulo Duque. Esta apostila é um material de estudo e pode ser adaptada e distribuída com créditos.</p>
