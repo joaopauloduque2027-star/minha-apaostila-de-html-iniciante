@@ -3,309 +3,241 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Apostila de HTML — Nível Básico | João Paulo Duque</title>
-  <meta name="description" content="Apostila básica de HTML criada por João Paulo Duque. Conceitos, exemplos e links." />
+  <title>Apostila de HTML — Versão Completa | João Paulo Duque</title>
+  <meta name="description" content="Apostila completa de HTML criada por João Paulo Duque. Conteúdo didático, exemplos, exercícios e versão para impressão/PDF." />
 
   <style>
-    :root {
-      --bg: #0f1724;
-      --card: #0b1220;
-      --muted: #98a0b3;
-      --text: #e6eef8;
-      --accent: #6ea8fe;
-      --glass: rgba(255,255,255,0.04);
-      --radius: 12px;
-      --max-width: 1100px;
-      --shadow: 0 8px 24px rgba(2,6,23,0.6);
+    :root{
+      --bg:#0f1724; --card:#0b1220; --muted:#98a0b3; --text:#e6eef8; --accent:#6ea8fe;
+      --paper-bg:#ffffff; --paper-text:#0b1220;
+      --max-width:900px; --radius:10px;
     }
 
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    html, body { height: 100%; }
-    body {
-      font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
-      background: linear-gradient(180deg, #071024 0%, #07122a 60%);
-      color: var(--text);
-      line-height: 1.6;
-      padding: 28px 20px;
-      display: flex;
-      justify-content: center;
+    *{box-sizing:border-box;margin:0;padding:0}
+    html,body{height:100%}
+    body{
+      font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, Arial;
+      background: linear-gradient(180deg,#071024 0%,#07122a 60%);
+      color:var(--text); padding:28px 18px; display:flex; justify-content:center;
     }
 
-    .container { width: 100%; max-width: var(--max-width); }
+    .container{width:100%;max-width:var(--max-width)}
+    header{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:18px}
+    .brand{display:flex;gap:12px;align-items:center}
+    .logo{width:56px;height:56px;border-radius:8px;background:linear-gradient(135deg,var(--accent),#3b82f6);display:flex;align-items:center;justify-content:center;color:#021026;font-weight:800}
+    h1{font-size:1.15rem}
+    p.lead{color:var(--muted);margin-top:4px}
 
-    header.site-header {
-      display: flex;
-      gap: 18px;
-      align-items: center;
-      justify-content: space-between;
-      margin-bottom: 20px;
+    .tools{display:flex;gap:8px}
+    .btn{background:transparent;border:1px solid rgba(255,255,255,0.06);color:var(--text);padding:8px 10px;border-radius:8px;text-decoration:none;cursor:pointer}
+    .btn.primary{background:linear-gradient(90deg,var(--accent),#4f7ef7);color:#021026;border:none}
+
+    /* Layout */
+    main{background:linear-gradient(180deg,rgba(255,255,255,0.01),rgba(255,255,255,0.02));padding:20px;border-radius:12px;border:1px solid rgba(255,255,255,0.03);box-shadow:0 12px 30px rgba(2,6,23,0.5)}
+
+    .chapter{background:transparent;padding:14px 0;border-bottom:1px dashed rgba(255,255,255,0.03)}
+    h2{color:var(--text);margin-bottom:8px}
+    h3{color:var(--accent);margin-top:12px}
+    p,li{color:var(--muted);margin:8px 0}
+    ul{margin-left:18px}
+
+    pre.code{background:#07122a;color:#cfe8ff;padding:12px;border-radius:8px;overflow:auto;border:1px solid rgba(255,255,255,0.03)}
+
+    footer{margin-top:18px;color:var(--muted);font-size:0.95rem;text-align:center}
+
+    /* Print styles (A4 friendly) */
+    @media print{
+      body{background:var(--paper-bg);color:var(--paper-text);padding:0}
+      .container{max-width:800px;margin:0 auto}
+      main{background:transparent;box-shadow:none;border:none;padding:0}
+      .logo{display:none}
+      .no-print{display:none}
+      a[href]:after{content:" (" attr(href) ")"}
+      pre.code{white-space:pre-wrap;word-break:break-word}
+      .chapter{page-break-inside:avoid}
+      footer{display:block;position:fixed;bottom:0;left:0;right:0;padding:8px 40px;background:transparent;color:#444}
+      @page{size:A4;margin:20mm}
     }
 
-    .brand {
-      display: flex;
-      gap: 14px;
-      align-items: center;
-    }
-
-    .logo {
-      width: 64px; height: 64px; border-radius: 10px;
-      background: linear-gradient(135deg, var(--accent), #3b82f6);
-      display: flex; align-items: center; justify-content: center;
-      font-weight: 700; color: #031028; box-shadow: var(--shadow); flex-shrink: 0;
-    }
-
-    .brand h1 {
-      font-size: 1.15rem;
-      letter-spacing: 0.2px;
-    }
-    .brand p {
-      font-size: 0.85rem;
-      color: var(--muted);
-      margin-top: 4px;
-    }
-
-    nav.topnav {
-      display: flex; gap: 12px; align-items: center;
-    }
-    nav.topnav a {
-      color: var(--text); text-decoration: none; padding: 8px 12px; border-radius: 10px;
-      font-weight: 600; background: transparent; border: 1px solid transparent;
-    }
-    nav.topnav a:hover {
-      background: var(--glass); border-color: rgba(255,255,255,0.04);
-    }
-
-    .hero {
-      background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
-      border-radius: var(--radius);
-      padding: 26px;
-      display: grid;
-      grid-template-columns: 1fr 320px;
-      gap: 22px;
-      align-items: center;
-      box-shadow: 0 10px 30px rgba(2,6,23,0.6);
-      margin-bottom: 22px;
-      border: 1px solid rgba(255,255,255,0.03);
-    }
-
-    .hero h2 { font-size: 1.5rem; margin-bottom: 8px; }
-    .hero p.lead { color: var(--muted); margin-bottom: 14px; }
-
-    .cta-group { display: flex; gap: 10px; flex-wrap: wrap; }
-    .btn {
-      padding: 10px 14px; border-radius: 10px; font-weight: 700; border: none; cursor: pointer; text-decoration: none; display: inline-block;
-    }
-    .btn-primary {
-      background: linear-gradient(90deg, var(--accent), #4f7ef7); color: #031028;
-    }
-    .btn-outline {
-      background: transparent; border: 1px solid rgba(255,255,255,0.04); color: var(--text);
-    }
-
-    .card {
-      background: linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.02));
-      border-radius: 12px; padding: 16px; border: 1px solid rgba(255,255,255,0.03);
-    }
-
-    main {
-      display: grid;
-      grid-template-columns: 1fr 320px;
-      gap: 20px;
-    }
-
-    article {
-      display: flex; flex-direction: column; gap: 18px;
-    }
-
-    section.panel {
-      background: var(--card);
-      padding: 18px; border-radius: 10px; border: 1px solid rgba(255,255,255,0.03);
-      box-shadow: 0 8px 18px rgba(2,6,23,0.5);
-    }
-
-    h3 { margin-bottom: 8px; }
-    p { color: var(--muted); }
-    ul, ol { padding-left: 1.2rem; color: var(--muted); }
-    li { margin-bottom: 0.4rem; }
-
-    .toc { display: flex; flex-direction: column; gap: 10px; margin-top: 8px; }
-    .toc a { color: var(--accent); text-decoration: none; }
-
-    pre.code {
-      background: #07122a; padding: 12px; border-radius: 8px; overflow: auto; border: 1px solid rgba(255,255,255,0.03);
-      color: #cfe8ff; font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Roboto Mono, monospace; font-size: 0.9rem;
-      margin: 10px 0;
-    }
-
-    figure { margin: 0; }
-    img.hero-img { width: 100%; border-radius: 8px; display: block; border: 1px solid rgba(255,255,255,0.03); }
-
-    aside.side { display: flex; flex-direction: column; gap: 14px; align-self: start; }
-
-    .meta { display: flex; gap: 10px; align-items: center; color: var(--muted); flex-wrap: wrap; }
-    .meta .badge { background: rgba(255,255,255,0.03); padding: 6px 10px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.02); }
-
-    ul.features { list-style: none; padding-left: 0; display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; }
-    li.feature { background: rgba(255,255,255,0.02); padding: 8px; border-radius: 8px; color: var(--muted); font-size: 0.95rem; margin: 0; }
-
-    footer.site-footer { margin-top: 20px; text-align: center; color: var(--muted); font-size: 0.9rem; padding: 18px 6px; }
-
-    @media (max-width: 1000px) {
-      .hero { grid-template-columns: 1fr; }
-      main { grid-template-columns: 1fr; }
-      nav.topnav { display: none; }
-    }
-
-    @media (max-width: 520px) {
-      .brand h1 { font-size: 1rem; }
-      .logo { width: 52px; height: 52px; }
-    }
+    /* Responsive */
+    @media (max-width:600px){.logo{width:48px;height:48px}.tools{flex-wrap:wrap}}
   </style>
+
+  <script>
+    function downloadPDF(){
+      // Trigger browser print dialog. User can choose "Save as PDF".
+      window.print();
+    }
+
+    // Small helper to expand/collapse examples
+    function toggle(id){
+      const el = document.getElementById(id);
+      if(!el) return;
+      el.style.display = el.style.display === 'none' ? 'block' : 'none';
+    }
+  </script>
 </head>
 <body>
-  <div class="container" role="document" aria-labelledby="titulo-apostila">
-    <header class="site-header" role="banner">
-      <div class="brand" aria-hidden="false">
+  <div class="container">
+    <header>
+      <div class="brand">
         <div class="logo">JP</div>
         <div>
-          <h1 id="titulo-apostila">Apostila de HTML — Nível Básico</h1>
-          <p>Por João Paulo Duque — Aprendizado em andamento</p>
+          <h1>Apostila completa de HTML — João Paulo Duque</h1>
+          <p class="lead">Versão detalhada com exemplos, exercícios e versão para impressão/PDF.</p>
         </div>
       </div>
 
-      <nav class="topnav" aria-label="Navegação principal">
-        <a href="#apresentacao">Apresentação</a>
-        <a href="#estrutra">Estrutura</a>
-        <a href="#exemplos">Exemplos</a>
-        <a href="#contato">Contato</a>
-      </nav>
+      <div class="tools no-print">
+        <button class="btn primary" onclick="downloadPDF()">Baixar / Imprimir PDF</button>
+        <a class="btn" href="#exercicios">Ir para exercícios</a>
+        <a class="btn" href="#referencias">Referências</a>
+      </div>
     </header>
 
-    <section class="hero" aria-labelledby="hero-title">
-      <div>
-        <h2 id="hero-title">Aprendendo HTML — passos práticos e exemplos</h2>
-        <p class="lead">Esta apostila reúne conceitos básicos de HTML, exemplos simples e links para acompanhar minha jornada. Ideal para iniciantes que querem entender a estrutura de uma página web.</p>
-
-        <div class="cta-group">
-          <button class="btn btn-primary" onclick="document.getElementById('estrutra').scrollIntoView({behavior:'smooth'})">Começar</button>
-          <a class="btn btn-outline" href="#exemplos">Ver exemplos</a>
-        </div>
-
-        <div style="margin-top:14px" class="meta">
-          <span class="badge">Nível: Básico</span>
-          <span class="badge">Atualizado: 2026</span>
-        </div>
-      </div>
-
-      <div class="card" aria-hidden="true">
-        <img src="foto-apresentacao.jpeg" alt="Foto de perfil do autor" class="hero-img" />
-        <figcaption style="color:var(--muted);font-size:0.9rem;margin-top:8px">Foto de apresentação — João Paulo</figcaption>
-      </div>
-    </section>
-
     <main>
-      <article>
-        <section id="apresentacao" class="panel" aria-labelledby="apresentacao-title">
-          <h3 id="apresentacao-title">Apresentação</h3>
-          <p>Olá! Eu estou aprendendo programação e criei esta apostila para registrar o que vou aprendendo sobre HTML. Compartilho aqui exemplos, imagens e links para acompanhar minha evolução.</p>
-          <p>HTML usa tags (como <code>&lt;h1&gt;</code>, <code>&lt;p&gt;</code>, <code>&lt;img&gt;</code>) para dizer ao navegador como organizar o conteúdo. Abaixo há seções com explicações e exemplos práticos.</p>
-        </section>
+      <section class="chapter" id="introducao">
+        <h2>Introdução</h2>
+        <p>Esta apostila foi criada para iniciantes que querem compreender a estrutura do HTML e praticar com exemplos. Ela reúne explicações teóricas, exemplos práticos, exercícios comentados e uma seção de referências. Você pode imprimir a página (Ctrl/Cmd+P) e salvar em PDF usando a opção do navegador.</p>
+      </section>
 
-        <section id="estrutra" class="panel" aria-labelledby="estrutura-title">
-          <h3 id="estrutura-title">Estrutura básica do HTML</h3>
-          <p>Uma página HTML mínima tem a seguinte estrutura:</p>
+      <section class="chapter" id="sumario">
+        <h2>Sumário</h2>
+        <ul>
+          <li>1. Introdução</li>
+          <li>2. Estrutura básica do HTML</li>
+          <li>3. Tags importantes</li>
+          <li>4. Imagens e mídia</li>
+          <li>5. Links e navegação</li>
+          <li>6. Formulários</li>
+          <li>7. Semântica e acessibilidade</li>
+          <li>8. Boas práticas</li>
+          <li>9. Exercícios e soluções</li>
+          <li>10. Referências</li>
+        </ul>
+      </section>
 
-          <pre class="code" aria-label="Exemplo de estrutura HTML">
-&lt;!DOCTYPE html&gt;
+      <section class="chapter" id="estrutura">
+        <h2>Estrutura básica do HTML</h2>
+        <p>Todo documento HTML tem elementos essenciais: a declaração do doctype, a tag <code>&lt;html&gt;</code>, a seção <code>&lt;head&gt;</code> com metadados e a seção <code>&lt;body&gt;</code> com o conteúdo visível.</p>
+
+        <pre class="code">&lt;!DOCTYPE html&gt;
 &lt;html lang="pt-BR"&gt;
   &lt;head&gt;
     &lt;meta charset="utf-8"&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
     &lt;title&gt;Título da página&lt;/title&gt;
   &lt;/head&gt;
   &lt;body&gt;
-    &lt;h1&gt;Olá&lt;/h1&gt;
-    &lt;p&gt;Primeiro parágrafo&lt;/p&gt;
+    &lt;h1&gt;Olá Mundo&lt;/h1&gt;
+    &lt;p&gt;Meu primeiro parágrafo.&lt;/p&gt;
   &lt;/body&gt;
 &lt;/html&gt;
-          </pre>
+        </pre>
+      </section>
 
-          <h4>Tags comuns</h4>
-          <ul class="features" aria-hidden="false">
-            <li class="feature">&lt;h1&gt; ... &lt;/h1&gt; — títulos</li>
-            <li class="feature">&lt;p&gt; ... &lt;/p&gt; — parágrafos</li>
-            <li class="feature">&lt;img&gt; — imagens (atributo alt obrigatório)</li>
-            <li class="feature">&lt;a&gt; — links</li>
-            <li class="feature">&lt;section&gt; &lt;article&gt; — organização semântica</li>
-            <li class="feature">&lt;nav&gt; — navegação</li>
-          </ul>
-        </section>
+      <section class="chapter" id="tags">
+        <h2>Tags importantes</h2>
+        <h3>Títulos e parágrafos</h3>
+        <p>As tags <code>&lt;h1&gt;</code> até <code>&lt;h6&gt;</code> definem hierarquia de títulos. Use apenas um <code>&lt;h1&gt;</code> por página para o título principal.</p>
 
-        <section id="exemplos" class="panel" aria-labelledby="exemplos-title">
-          <h3 id="exemplos-title">Exemplos práticos</h3>
+        <h3>Listas</h3>
+        <p>Listas ordenadas (<code>&lt;ol&gt;</code>) e não ordenadas (<code>&lt;ul&gt;</code>) são usadas para agrupar itens (<code>&lt;li&gt;</code>).</p>
 
-          <h4>Imagem com legenda</h4>
-          <figure style="margin-top:8px">
-            <img src="foto-banda.jpg" alt="João Paulo com membros da banda" style="width:100%;border-radius:8px" />
-            <figcaption style="color:var(--muted);font-size:0.95rem;margin-top:8px">Eu e meu certificado de Lógica — começo da jornada.</figcaption>
-          </figure>
+        <h3>Blocos semânticos</h3>
+        <p>Use <code>&lt;header&gt;</code>, <code>&lt;nav&gt;</code>, <code>&lt;main&gt;</code>, <code>&lt;section&gt;</code>, <code>&lt;article&gt;</code>, <code>&lt;aside&gt;</code> e <code>&lt;footer&gt;</code> para estruturar o conteúdo.</p>
+      </section>
 
-          <h4 style="margin-top:14px">Link externo (com segurança)</h4>
-          <p>Use rel="noopener" ou rel="noreferrer" em links que abrem em nova aba:</p>
-          <pre class="code">&lt;a href="https://github.com/usuario" target="_blank" rel="noopener"&gt;GitHub&lt;/a&gt;</pre>
+      <section class="chapter" id="imagens">
+        <h2>Imagens e mídia</h2>
+        <p>A tag <code>&lt;img&gt;</code> insere imagens. Sempre inclua o atributo <code>alt</code> para acessibilidade e escolha formatos otimizados (jpeg, webp).</p>
 
-          <h4 style="margin-top:14px">Dicas rápidas</h4>
-          <ul>
-            <li>Evite nomes de arquivo com espaços: use foto-apresentacao.jpeg</li>
-            <li>Use textos alternativos descritivos em imagens (alt)</li>
-            <li>Valide seu HTML em validator.w3.org</li>
-          </ul>
-        </section>
+        <pre class="code">&lt;img src="foto-apresentacao.jpeg" alt="João Paulo sorrindo" width="300" /&gt;</pre>
 
-        <section id="aprendizados" class="panel" aria-labelledby="aprendizados-title">
-          <h3 id="aprendizados-title">O que aprendi até agora</h3>
-          <ol>
-            <li>Como estruturar uma página HTML básica</li>
-            <li>Como usar tags semânticas para organizar conteúdo</li>
-            <li>Importância de atributos como alt e rel</li>
-            <li>Boas práticas de nomes de arquivos e links</li>
-          </ol>
-        </section>
-      </article>
+        <p>Para áudio e vídeo, use <code>&lt;audio&gt;</code> e <code>&lt;video&gt;</code> com controles:</p>
+        <pre class="code">&lt;audio controls&gt;
+  &lt;source src="audio.mp3" type="audio/mpeg"&gt;
+&lt;/audio&gt;
 
-      <aside class="side" aria-labelledby="barra-lateral">
-        <div class="card panel" id="barra-lateral" role="complementary">
-          <h4>Sumário</h4>
-          <nav class="toc" aria-label="Sumário da apostila">
-            <a href="#apresentacao">• Apresentação</a>
-            <a href="#estrutra">• Estrutura básica</a>
-            <a href="#exemplos">• Exemplos práticos</a>
-            <a href="#aprendizados">• Aprendizados</a>
-            <a href="#contato">• Contato</a>
-          </nav>
-        </div>
+&lt;video controls width="480"&gt;
+  &lt;source src="video.mp4" type="video/mp4"&gt;
+&lt;/video&gt;
+        </pre>
+      </section>
 
-        <div class="card panel">
-          <h4>Minhas redes</h4>
-          <p style="color:var(--muted)">Siga para acompanhar a evolução:</p>
-          <div style="display:flex;flex-direction:column;gap:8px;margin-top:8px">
-            <a class="btn btn-outline" href="https://github.com/duquejoaopaulo1-afk" target="_blank" rel="noopener">GitHub</a>
-            <a class="btn btn-outline" href="https://www.linkedin.com/feed/" target="_blank" rel="noopener">LinkedIn</a>
-            <a class="btn btn-outline" href="https://www.instagram.com/joaopaulo.duque/" target="_blank" rel="noopener">Instagram</a>
-            <a class="btn btn-outline" href="https://www.tiktok.com/@joaopaulo" target="_blank" rel="noopener">TikTok</a>
-          </div>
-        </div>
+      <section class="chapter" id="links">
+        <h2>Links e navegação</h2>
+        <p>Links são criados com <code>&lt;a&gt;</code>. Para abrir em nova aba, use <code>target="_blank"</code> e para segurança adicione <code>rel="noopener noreferrer"</code>.</p>
+        <pre class="code">&lt;a href="https://github.com/usuario" target="_blank" rel="noopener noreferrer"&gt;Meu GitHub&lt;/a&gt;</pre>
+      </section>
 
-        <div class="card panel">
-          <h4>Objetivos</h4>
-          <p style="color:var(--muted)">Curto prazo: consolidar tags HTML e criar páginas simples. Médio prazo: aprender CSS e publicar no GitHub Pages.</p>
-        </div>
-      </aside>
+      <section class="chapter" id="formularios">
+        <h2>Formulários</h2>
+        <p>Formulários permitem entrada de dados:</p>
+        <pre class="code">&lt;form action="/enviar" method="post"&gt;
+  &lt;label&gt;Nome&lt;input type="text" name="nome" required&gt;&lt;/label&gt;
+  &lt;label&gt;Email&lt;input type="email" name="email" required&gt;&lt;/label&gt;
+  &lt;button type="submit"&gt;Enviar&lt;/button&gt;
+&lt;/form&gt;
+        </pre>
+
+        <p>Dicas: valide no cliente e servidor; proteja contra CSRF; não confie apenas em JavaScript.</p>
+      </section>
+
+      <section class="chapter" id="semantica">
+        <h2>Semântica e acessibilidade</h2>
+        <p>HTML semântico ajuda a SEO e leitores de tela. Use atributos ARIA quando necessário e sempre textos alternativos para imagens.</p>
+        <p>Exemplo de um artigo com meta-informações:</p>
+        <pre class="code">&lt;article&gt;
+  &lt;h2&gt;Título do artigo&lt;/h2&gt;
+  &lt;p&gt;Autor: João Paulo&lt;/p&gt;
+  &lt;p&gt;Conteúdo do artigo...&lt;/p&gt;
+&lt;/article&gt;</pre>
+      </section>
+
+      <section class="chapter" id="boas-praticas">
+        <h2>Boas práticas</h2>
+        <ul>
+          <li>Use nomes de arquivos sem espaços e minúsculos (ex.: foto-apresentacao.jpeg).</li>
+          <li>Forneça <code>alt</code> descritivo para imagens.</li>
+          <li>Teste em diferentes tamanhos de tela (responsivo).</li>
+          <li>Valide o HTML em validator.w3.org.</li>
+          <li>Minimize dependências externas e cuide de desempenho.</li>
+        </ul>
+      </section>
+
+      <section class="chapter" id="exercicios">
+        <h2>Exercícios</h2>
+        <ol>
+          <li>Crie uma página com título, dois parágrafos e uma imagem com legenda.</li>
+          <li>Faça um formulário simples de contato com validação do tipo de input.</li>
+          <li>Monte uma pequena galeria de imagens com <code>&lt;figure&gt;</code> e <code>&lt;figcaption&gt;</code>.</li>
+        </ol>
+
+        <h3>Soluções (resumidas)</h3>
+        <p id="solucao1"><strong>Ex.1</strong> — Estrutura mínima com imagem e legenda:</p>
+        <pre class="code">&lt;h1&gt;Minha página&lt;/h1&gt;
+&lt;p&gt;Parágrafo 1&lt;/p&gt;
+&lt;p&gt;Parágrafo 2&lt;/p&gt;
+&lt;figure&gt;
+  &lt;img src="foto.jpg" alt="Descrição" width="300"&gt;
+  &lt;figcaption&gt;Legenda da imagem&lt;/figcaption&gt;
+&lt;/figure&gt;</pre>
+      </section>
+
+      <section class="chapter" id="referencias">
+        <h2>Referências e leitura recomendada</h2>
+        <ul>
+          <li><a href="https://developer.mozilla.org/pt-BR/docs/Web/HTML" target="_blank" rel="noopener noreferrer">MDN — HTML (em português)</a></li>
+          <li><a href="https://validator.w3.org/" target="_blank" rel="noopener noreferrer">W3C Validator</a></li>
+          <li><a href="https://www.w3schools.com/html/" target="_blank" rel="noopener noreferrer">W3Schools — HTML</a></li>
+        </ul>
+      </section>
+
+      <footer>
+        <p>&copy; 2026 — João Paulo Duque. Esta apostila é um material de estudo e pode ser adaptada e distribuída com créditos.</p>
+      </footer>
     </main>
-
-    <footer class="site-footer" id="contato" role="contentinfo">
-      <p>&copy; 2026 — Criado por João Paulo Duque</p>
-      <p style="color:var(--muted);font-size:0.9rem;margin-top:6px">Se quiser, posso continuar e melhorar a visualização da apostila com mais páginas ou imagens.</p>
-    </footer>
   </div>
 </body>
 </html>
