@@ -1,293 +1,311 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta
-      name="description"
-      content="Meu estúdio de música — jornada, composição, arte e evolução musical."
-    />
-    <meta property="og:title" content="Meu Estúdio de Música | Toru" />
-    <meta
-      property="og:description"
-      content="Siga a minha jornada de estudos, criação e evolução no universo da música."
-    />
-    <meta property="og:type" content="website" />
-    <title>Meu Estúdio de Música | Toru</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
-      rel="stylesheet"
-    />
-    <link rel="stylesheet" href="assets/css/style.css" />
-  </head>
-  <body>
-    <header class="site-header">
-      <div class="container nav">
-        <div class="brand" aria-label="Meu Estúdio">
-          <span class="brand-mark">T</span>
-          <span>Meu Estúdio</span>
-        </div>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Apostila de HTML — Nível Básico | João Paulo Duque</title>
+  <meta name="description" content="Apostila básica de HTML criada por João Paulo Duque. Conceitos, exemplos e links." />
 
-        <nav class="menu" aria-label="Menu principal">
-          <a href="#sobre">Sobre</a>
-          <a href="#historia">História</a>
-          <a href="#links">Redes</a>
-          <a href="#galeria">Galeria</a>
-          <a href="#contato">Contato</a>
-        </nav>
+  <style>
+    :root {
+      --bg: #0f1724;
+      --card: #0b1220;
+      --muted: #98a0b3;
+      --text: #e6eef8;
+      --accent: #6ea8fe;
+      --glass: rgba(255,255,255,0.04);
+      --radius: 12px;
+      --max-width: 1100px;
+      --shadow: 0 8px 24px rgba(2,6,23,0.6);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { height: 100%; }
+    body {
+      font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      background: linear-gradient(180deg, #071024 0%, #07122a 60%);
+      color: var(--text);
+      line-height: 1.6;
+      padding: 28px 20px;
+      display: flex;
+      justify-content: center;
+    }
+
+    .container { width: 100%; max-width: var(--max-width); }
+
+    header.site-header {
+      display: flex;
+      gap: 18px;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 20px;
+    }
+
+    .brand {
+      display: flex;
+      gap: 14px;
+      align-items: center;
+    }
+
+    .logo {
+      width: 64px; height: 64px; border-radius: 10px;
+      background: linear-gradient(135deg, var(--accent), #3b82f6);
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 700; color: #031028; box-shadow: var(--shadow); flex-shrink: 0;
+    }
+
+    .brand h1 {
+      font-size: 1.15rem;
+      letter-spacing: 0.2px;
+    }
+    .brand p {
+      font-size: 0.85rem;
+      color: var(--muted);
+      margin-top: 4px;
+    }
+
+    nav.topnav {
+      display: flex; gap: 12px; align-items: center;
+    }
+    nav.topnav a {
+      color: var(--text); text-decoration: none; padding: 8px 12px; border-radius: 10px;
+      font-weight: 600; background: transparent; border: 1px solid transparent;
+    }
+    nav.topnav a:hover {
+      background: var(--glass); border-color: rgba(255,255,255,0.04);
+    }
+
+    .hero {
+      background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      border-radius: var(--radius);
+      padding: 26px;
+      display: grid;
+      grid-template-columns: 1fr 320px;
+      gap: 22px;
+      align-items: center;
+      box-shadow: 0 10px 30px rgba(2,6,23,0.6);
+      margin-bottom: 22px;
+      border: 1px solid rgba(255,255,255,0.03);
+    }
+
+    .hero h2 { font-size: 1.5rem; margin-bottom: 8px; }
+    .hero p.lead { color: var(--muted); margin-bottom: 14px; }
+
+    .cta-group { display: flex; gap: 10px; flex-wrap: wrap; }
+    .btn {
+      padding: 10px 14px; border-radius: 10px; font-weight: 700; border: none; cursor: pointer; text-decoration: none; display: inline-block;
+    }
+    .btn-primary {
+      background: linear-gradient(90deg, var(--accent), #4f7ef7); color: #031028;
+    }
+    .btn-outline {
+      background: transparent; border: 1px solid rgba(255,255,255,0.04); color: var(--text);
+    }
+
+    .card {
+      background: linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.02));
+      border-radius: 12px; padding: 16px; border: 1px solid rgba(255,255,255,0.03);
+    }
+
+    main {
+      display: grid;
+      grid-template-columns: 1fr 320px;
+      gap: 20px;
+    }
+
+    article {
+      display: flex; flex-direction: column; gap: 18px;
+    }
+
+    section.panel {
+      background: var(--card);
+      padding: 18px; border-radius: 10px; border: 1px solid rgba(255,255,255,0.03);
+      box-shadow: 0 8px 18px rgba(2,6,23,0.5);
+    }
+
+    h3 { margin-bottom: 8px; }
+    p { color: var(--muted); }
+    ul, ol { padding-left: 1.2rem; color: var(--muted); }
+    li { margin-bottom: 0.4rem; }
+
+    .toc { display: flex; flex-direction: column; gap: 10px; margin-top: 8px; }
+    .toc a { color: var(--accent); text-decoration: none; }
+
+    pre.code {
+      background: #07122a; padding: 12px; border-radius: 8px; overflow: auto; border: 1px solid rgba(255,255,255,0.03);
+      color: #cfe8ff; font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Roboto Mono, monospace; font-size: 0.9rem;
+      margin: 10px 0;
+    }
+
+    figure { margin: 0; }
+    img.hero-img { width: 100%; border-radius: 8px; display: block; border: 1px solid rgba(255,255,255,0.03); }
+
+    aside.side { display: flex; flex-direction: column; gap: 14px; align-self: start; }
+
+    .meta { display: flex; gap: 10px; align-items: center; color: var(--muted); flex-wrap: wrap; }
+    .meta .badge { background: rgba(255,255,255,0.03); padding: 6px 10px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.02); }
+
+    ul.features { list-style: none; padding-left: 0; display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; }
+    li.feature { background: rgba(255,255,255,0.02); padding: 8px; border-radius: 8px; color: var(--muted); font-size: 0.95rem; margin: 0; }
+
+    footer.site-footer { margin-top: 20px; text-align: center; color: var(--muted); font-size: 0.9rem; padding: 18px 6px; }
+
+    @media (max-width: 1000px) {
+      .hero { grid-template-columns: 1fr; }
+      main { grid-template-columns: 1fr; }
+      nav.topnav { display: none; }
+    }
+
+    @media (max-width: 520px) {
+      .brand h1 { font-size: 1rem; }
+      .logo { width: 52px; height: 52px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container" role="document" aria-labelledby="titulo-apostila">
+    <header class="site-header" role="banner">
+      <div class="brand" aria-hidden="false">
+        <div class="logo">JP</div>
+        <div>
+          <h1 id="titulo-apostila">Apostila de HTML — Nível Básico</h1>
+          <p>Por João Paulo Duque — Aprendizado em andamento</p>
+        </div>
       </div>
+
+      <nav class="topnav" aria-label="Navegação principal">
+        <a href="#apresentacao">Apresentação</a>
+        <a href="#estrutra">Estrutura</a>
+        <a href="#exemplos">Exemplos</a>
+        <a href="#contato">Contato</a>
+      </nav>
     </header>
 
+    <section class="hero" aria-labelledby="hero-title">
+      <div>
+        <h2 id="hero-title">Aprendendo HTML — passos práticos e exemplos</h2>
+        <p class="lead">Esta apostila reúne conceitos básicos de HTML, exemplos simples e links para acompanhar minha jornada. Ideal para iniciantes que querem entender a estrutura de uma página web.</p>
+
+        <div class="cta-group">
+          <button class="btn btn-primary" onclick="document.getElementById('estrutra').scrollIntoView({behavior:'smooth'})">Começar</button>
+          <a class="btn btn-outline" href="#exemplos">Ver exemplos</a>
+        </div>
+
+        <div style="margin-top:14px" class="meta">
+          <span class="badge">Nível: Básico</span>
+          <span class="badge">Atualizado: 2026</span>
+        </div>
+      </div>
+
+      <div class="card" aria-hidden="true">
+        <img src="foto-apresentacao.jpeg" alt="Foto de perfil do autor" class="hero-img" />
+        <figcaption style="color:var(--muted);font-size:0.9rem;margin-top:8px">Foto de apresentação — João Paulo</figcaption>
+      </div>
+    </section>
+
     <main>
-      <section class="hero">
-        <div class="container hero-inner">
-          <div class="hero-copy">
-            <p class="eyebrow">Olá, que bom te ver por aqui!</p>
-            <h1>Meu estúdio de música</h1>
-            <p class="lead">
-              Sinta-se em casa e acompanhe a minha jornada de estudos, evolução e amor pela música.
-            </p>
+      <article>
+        <section id="apresentacao" class="panel" aria-labelledby="apresentacao-title">
+          <h3 id="apresentacao-title">Apresentação</h3>
+          <p>Olá! Eu estou aprendendo programação e criei esta apostila para registrar o que vou aprendendo sobre HTML. Compartilho aqui exemplos, imagens e links para acompanhar minha evolução.</p>
+          <p>HTML usa tags (como <code>&lt;h1&gt;</code>, <code>&lt;p&gt;</code>, <code>&lt;img&gt;</code>) para dizer ao navegador como organizar o conteúdo. Abaixo há seções com explicações e exemplos práticos.</p>
+        </section>
 
-            <div class="hero-actions">
-              <a class="button primary" href="#sobre">Conhecer mais</a>
-              <a class="button secondary" href="#links">Me acompanhe</a>
-            </div>
-          </div>
+        <section id="estrutra" class="panel" aria-labelledby="estrutura-title">
+          <h3 id="estrutura-title">Estrutura básica do HTML</h3>
+          <p>Uma página HTML mínima tem a seguinte estrutura:</p>
 
-          <div class="hero-card" aria-label="Perfil do artista">
-            <div class="avatar">T</div>
-            <p class="card-name">João Paulo “Toru”</p>
-            <p class="card-role">Músico • Estudante • Criador</p>
+          <pre class="code" aria-label="Exemplo de estrutura HTML">
+&lt;!DOCTYPE html&gt;
+&lt;html lang="pt-BR"&gt;
+  &lt;head&gt;
+    &lt;meta charset="utf-8"&gt;
+    &lt;title&gt;Título da página&lt;/title&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;h1&gt;Olá&lt;/h1&gt;
+    &lt;p&gt;Primeiro parágrafo&lt;/p&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+          </pre>
+
+          <h4>Tags comuns</h4>
+          <ul class="features" aria-hidden="false">
+            <li class="feature">&lt;h1&gt; ... &lt;/h1&gt; — títulos</li>
+            <li class="feature">&lt;p&gt; ... &lt;/p&gt; — parágrafos</li>
+            <li class="feature">&lt;img&gt; — imagens (atributo alt obrigatório)</li>
+            <li class="feature">&lt;a&gt; — links</li>
+            <li class="feature">&lt;section&gt; &lt;article&gt; — organização semântica</li>
+            <li class="feature">&lt;nav&gt; — navegação</li>
+          </ul>
+        </section>
+
+        <section id="exemplos" class="panel" aria-labelledby="exemplos-title">
+          <h3 id="exemplos-title">Exemplos práticos</h3>
+
+          <h4>Imagem com legenda</h4>
+          <figure style="margin-top:8px">
+            <img src="foto-banda.jpg" alt="João Paulo com membros da banda" style="width:100%;border-radius:8px" />
+            <figcaption style="color:var(--muted);font-size:0.95rem;margin-top:8px">Eu e meu certificado de Lógica — começo da jornada.</figcaption>
+          </figure>
+
+          <h4 style="margin-top:14px">Link externo (com segurança)</h4>
+          <p>Use rel="noopener" ou rel="noreferrer" em links que abrem em nova aba:</p>
+          <pre class="code">&lt;a href="https://github.com/usuario" target="_blank" rel="noopener"&gt;GitHub&lt;/a&gt;</pre>
+
+          <h4 style="margin-top:14px">Dicas rápidas</h4>
+          <ul>
+            <li>Evite nomes de arquivo com espaços: use foto-apresentacao.jpeg</li>
+            <li>Use textos alternativos descritivos em imagens (alt)</li>
+            <li>Valide seu HTML em validator.w3.org</li>
+          </ul>
+        </section>
+
+        <section id="aprendizados" class="panel" aria-labelledby="aprendizados-title">
+          <h3 id="aprendizados-title">O que aprendi até agora</h3>
+          <ol>
+            <li>Como estruturar uma página HTML básica</li>
+            <li>Como usar tags semânticas para organizar conteúdo</li>
+            <li>Importância de atributos como alt e rel</li>
+            <li>Boas práticas de nomes de arquivos e links</li>
+          </ol>
+        </section>
+      </article>
+
+      <aside class="side" aria-labelledby="barra-lateral">
+        <div class="card panel" id="barra-lateral" role="complementary">
+          <h4>Sumário</h4>
+          <nav class="toc" aria-label="Sumário da apostila">
+            <a href="#apresentacao">• Apresentação</a>
+            <a href="#estrutra">• Estrutura básica</a>
+            <a href="#exemplos">• Exemplos práticos</a>
+            <a href="#aprendizados">• Aprendizados</a>
+            <a href="#contato">• Contato</a>
+          </nav>
+        </div>
+
+        <div class="card panel">
+          <h4>Minhas redes</h4>
+          <p style="color:var(--muted)">Siga para acompanhar a evolução:</p>
+          <div style="display:flex;flex-direction:column;gap:8px;margin-top:8px">
+            <a class="btn btn-outline" href="https://github.com/duquejoaopaulo1-afk" target="_blank" rel="noopener">GitHub</a>
+            <a class="btn btn-outline" href="https://www.linkedin.com/feed/" target="_blank" rel="noopener">LinkedIn</a>
+            <a class="btn btn-outline" href="https://www.instagram.com/joaopaulo.duque/" target="_blank" rel="noopener">Instagram</a>
+            <a class="btn btn-outline" href="https://www.tiktok.com/@joaopaulo" target="_blank" rel="noopener">TikTok</a>
           </div>
         </div>
-      </section>
 
-      <section class="section stats-bar">
-        <div class="container stats-grid">
-          <div class="stat-item">
-            <strong>+10</strong>
-            <span>anos de paixão pela música</span>
-          </div>
-          <div class="stat-item">
-            <strong>2018</strong>
-            <span>ano da virada criativa</span>
-          </div>
-          <div class="stat-item">
-            <strong>3+</strong>
-            <span>projetos em movimento</span>
-          </div>
-          <div class="stat-item">
-            <strong>Live</strong>
-            <span>arte, estudo e dedicação</span>
-          </div>
+        <div class="card panel">
+          <h4>Objetivos</h4>
+          <p style="color:var(--muted)">Curto prazo: consolidar tags HTML e criar páginas simples. Médio prazo: aprender CSS e publicar no GitHub Pages.</p>
         </div>
-      </section>
-
-      <section id="sobre" class="section">
-        <div class="container">
-          <div class="section-heading">
-            <p class="eyebrow">Apresentação</p>
-            <h2>Permita-me apresentar-me</h2>
-          </div>
-
-          <div class="about-grid">
-            <div class="about-text">
-              <p>
-                Espero que vocês gostem de música, assim como eu, e estejam prontos para acompanhar
-                a rotina de um músico que ama aprender, criar e evoluir todos os dias.
-              </p>
-              <p>
-                Sou o <strong>João Paulo</strong>, mas pode me chamar de <strong>Toru</strong>.
-                Hoje, sigo com meu caminho de estudo, composição e descoberta musical.
-              </p>
-              <p>
-                Além de estudar, também componho músicas autorais com amigos e colegas, e isso tem
-                sido uma parte importante da minha trajetória.
-              </p>
-            </div>
-
-            <aside class="quote-card">
-              <p>“A música é uma forma de vida, de expressão e de evolução constante.”</p>
-            </aside>
-          </div>
-        </div>
-      </section>
-
-      <section id="historia" class="section alt">
-        <div class="container">
-          <div class="section-heading">
-            <p class="eyebrow">Minha história</p>
-            <h2>Como me tornei músico?</h2>
-          </div>
-
-          <div class="timeline">
-            <article class="timeline-item">
-              <span class="year">Infância</span>
-              <div>
-                <h3>O começo da paixão</h3>
-                <p>
-                  Desde pequeno, ouvi música em casa e fui influenciado por sons e artistas de vários
-                  estilos. Foi nessa fase que a vontade de aprender e criar começou a se formar.
-                </p>
-              </div>
-            </article>
-
-            <article class="timeline-item">
-              <span class="year">Adolescência</span>
-              <div>
-                <h3>Explorando instrumentos e estudos</h3>
-                <p>
-                  Comecei a conhecer estilos diferentes, nos quais fui me apaixonando cada vez mais.
-                  Foi aí que comecei a tocar violão e a aprender cifras, tablaturas e partituras.
-                </p>
-              </div>
-            </article>
-
-            <article class="timeline-item">
-              <span class="year">2018</span>
-              <div>
-                <h3>O meu lado criativo</h3>
-                <p>
-                  Depois de muito estudo e dedicação, surgiu o momento de mostrar meu lado criativo e
-                  começar a produzir música de forma mais consciente e autêntica.
-                </p>
-              </div>
-            </article>
-
-            <article class="timeline-item">
-              <span class="year">Hoje</span>
-              <div>
-                <h3>Continuando a evoluir</h3>
-                <p>
-                  A pandemia trouxe pausa e reflexão, mas também me motivou ainda mais a seguir em
-                  frente. Hoje, sigo aprendendo, compondo e vivendo a música com intensidade.
-                </p>
-              </div>
-            </article>
-          </div>
-        </div>
-      </section>
-
-      <section class="section">
-        <div class="container">
-          <div class="section-heading">
-            <p class="eyebrow">A banda</p>
-            <h2>Uma jornada coletiva</h2>
-          </div>
-
-          <div class="band-box">
-            <p>
-              Em um momento importante, eu e meus amigos decidimos nos reunir para trocar ideias,
-              criar novas composições e pensar em um nome para a banda. A partir daí, começamos a
-              construir algo com energia, amizade e identidade musical.
-            </p>
-            <ul>
-              <li>Trabalho coletivo e criativo</li>
-              <li>Fé, alegria e emoção nas composições</li>
-              <li>Histórias sobre relacionamento, vida e inspiração</li>
-            </ul>
-          </div>
-        </div>
-      </section>
-
-      <section class="section alt music-highlights">
-        <div class="container">
-          <div class="section-heading">
-            <p class="eyebrow">O caminho</p>
-            <h2>Trabalho, arte e dedicação</h2>
-          </div>
-
-          <div class="feature-grid">
-            <article class="feature-card">
-              <h3>Estudo</h3>
-              <p>Aprender todos os dias, evoluir com disciplina e transformar cada experiência em música.</p>
-            </article>
-            <article class="feature-card">
-              <h3>Composição</h3>
-              <p>Escrever letras, criar melodias e dar vida a ideias que nascem do coração.</p>
-            </article>
-            <article class="feature-card">
-              <h3>Performance</h3>
-              <p>Compartilhar arte com autenticidade, emoção e presença em cada momento.</p>
-            </article>
-          </div>
-        </div>
-      </section>
-
-      <section id="links" class="section alt">
-        <div class="container">
-          <div class="section-heading">
-            <p class="eyebrow">Conecte-se</p>
-            <h2>Minhas redes e links</h2>
-          </div>
-
-          <div class="links-grid">
-            <a href="https://github.com/duquejoaopaulo1-afk" target="_blank" rel="noreferrer">GitHub</a>
-            <a href="https://www.linkedin.com/in/joaopaulo-duque/" target="_blank" rel="noreferrer">LinkedIn</a>
-            <a href="https://www.instagram.com/joaapauloduque/" target="_blank" rel="noreferrer">Instagram</a>
-            <a href="https://www.tiktok.com/@joaapaulo" target="_blank" rel="noreferrer">TikTok</a>
-          </div>
-
-          <div class="share-row">
-            <button class="button secondary" id="share-btn" type="button">Compartilhar</button>
-            <a id="share-wa" class="button share-button whatsapp" href="#">WhatsApp</a>
-            <a id="share-fb" class="button share-button facebook" href="#">Facebook</a>
-            <a id="share-tw" class="button share-button twitter" href="#">Twitter</a>
-            <a id="share-mail" class="button share-button email" href="#">Email</a>
-          </div>
-        </div>
-      </section>
-
-      <section id="galeria" class="section">
-        <div class="container">
-          <div class="section-heading">
-            <p class="eyebrow">Memórias</p>
-            <h2>Galeria</h2>
-          </div>
-
-          <div class="gallery-grid">
-            <figure class="gallery-card">
-              <img src="https://github.com/user-attachments/assets/0b8caa71-982d-4feb-8ab1-da88f326a6c2" alt="joao paulo" />
-              <figcaption>João Paulo</figcaption>
-            </figure>
-
-            <figure class="gallery-card">
-              <img src="https://github.com/user-attachments/assets/d04df201-d82c-4aa9-9461-e10ccb9e877c" alt="joao paulo e alexandre" />
-              <figcaption>João Paulo e Alexandre</figcaption>
-            </figure>
-
-            <figure class="gallery-card">
-              <img src="https://github.com/user-attachments/assets/8ba1a1e7-f4cd-4da5-a64c-7c4c21585a34" alt="joao paulo e jorge" />
-              <figcaption>João Paulo e Jorge</figcaption>
-            </figure>
-
-            <figure class="gallery-card">
-              <img src="https://github.com/user-attachments/assets/88a6ab3c-f94e-4187-83a1-74d04a78eded" alt="sword black angel" />
-              <figcaption>Sword Black Angel</figcaption>
-            </figure>
-
-            <figure class="gallery-card">
-              <img src="https://github.com/user-attachments/assets/a6f2dd99-1da4-4b26-a3f0-79523c0e5207" alt="IMG-2026" />
-              <figcaption>Momentos</figcaption>
-            </figure>
-
-            <figure class="gallery-card">
-              <img src="https://github.com/user-attachments/assets/7690d18e-a664-4a50-bba6-f2391511fd64" alt="FB imagem" />
-              <figcaption>Foto antiga</figcaption>
-            </figure>
-          </div>
-        </div>
-      </section>
+      </aside>
     </main>
 
-    <footer id="contato" class="site-footer">
-      <div class="container footer-inner">
-        <p>© <span id="year"></span> — Criado por João Paulo Duque</p>
-      </div>
+    <footer class="site-footer" id="contato" role="contentinfo">
+      <p>&copy; 2026 — Criado por João Paulo Duque</p>
+      <p style="color:var(--muted);font-size:0.9rem;margin-top:6px">Se quiser, posso continuar e melhorar a visualização da apostila com mais páginas ou imagens.</p>
     </footer>
-
-    <script src="assets/js/script.js"></script>
-  </body>
+  </div>
+</body>
 </html>
