@@ -1,0 +1,60 @@
+/* styles for apostila — assets/styles.css */
+:root{
+  --bg:#0f1724; --card:#0b1220; --muted:#98a0b3; --text:#e6eef8; --accent:#6ea8fe;
+  --paper-bg:#ffffff; --paper-text:#0b1220; --max-width:900px; --radius:10px;
+}
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, Arial, "Helvetica Neue", sans-serif;
+  background: linear-gradient(180deg,#071024 0%,#07122a 60%);
+  color:var(--text); padding:28px 18px; display:flex; justify-content:center; -webkit-font-smoothing:antialiased;
+}
+.container{width:100%;max-width:var(--max-width)}
+.skip-link{position:absolute;left:-999px;top:auto;width:1px;height:1px;overflow:hidden}
+.skip-link:focus{position:static;left:auto;top:auto;width:auto;height:auto;background:#fff;color:#000;padding:8px;border-radius:4px;text-decoration:none}
+header{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:18px}
+.brand{display:flex;gap:12px;align-items:center}
+.logo{width:56px;height:56px;border-radius:8px;background:linear-gradient(135deg,var(--accent),#3b82f6);display:flex;align-items:center;justify-content:center;color:#021026;font-weight:800}
+h1{font-size:1.15rem;margin:0}
+p.lead{color:var(--muted);margin-top:4px}
+.tools{display:flex;gap:8px}
+.btn{background:transparent;border:1px solid rgba(255,255,255,0.06);color:var(--text);padding:8px 10px;border-radius:8px;text-decoration:none;cursor:pointer;font-size:0.95rem}
+.btn.primary{background:linear-gradient(90deg,var(--accent),#4f7ef7);color:#021026;border:none}
+main{background:linear-gradient(180deg,rgba(255,255,255,0.01),rgba(255,255,255,0.02));padding:22px;border-radius:12px;border:1px solid rgba(255,255,255,0.03);box-shadow:0 12px 30px rgba(2,6,23,0.5)}
+.toc{margin-bottom:18px;padding:12px;border-radius:8px;background:linear-gradient(180deg,rgba(255,255,255,0.01),transparent);border:1px solid rgba(255,255,255,0.03)}
+.toc ul{list-style:none;padding-left:0}
+.toc li{margin:6px 0}
+.toc a{color:var(--accent);text-decoration:none}
+.chapter{background:transparent;padding:14px 0;border-bottom:1px dashed rgba(255,255,255,0.03)}
+.chapter summary{list-style:none;cursor:pointer}
+.chapter h2{color:var(--text);margin:0 0 8px 0;font-size:1.05rem}
+.chapter .chapter-content{margin-top:10px}
+h3{color:var(--accent);margin-top:12px}
+p,li,code{color:var(--muted);margin:8px 0}
+ul{margin-left:18px}
+pre.code{background:#07122a;color:#cfe8ff;padding:12px;border-radius:8px;overflow:auto;border:1px solid rgba(255,255,255,0.03);white-space:pre}
+footer{margin-top:18px;color:var(--muted);font-size:0.95rem;text-align:center}
+
+/* Print styles: make it easy to read as PDF */
+@media print{
+  body{background:var(--paper-bg);color:var(--paper-text);padding:12mm;font-size:12pt}
+  .container{max-width:800px;margin:0 auto}
+  header{display:block}
+  .logo{display:none}
+  .no-print{display:none}
+  main{background:transparent;box-shadow:none;border:none;padding:0}
+  .toc{border:none;padding:0;margin-bottom:8px}
+  .toc a{color:inherit}
+  pre.code{white-space:pre-wrap;word-break:break-word;border:1px solid #ddd;background:#f9f9f9;color:#111;padding:8px}
+  .chapter{page-break-inside:avoid;margin-bottom:18px}
+  summary{display:block}
+  details{display:block}
+  .chapter .chapter-content{display:block !important}
+  footer{position:fixed;bottom:0;left:0;right:0;padding:8px 40px;background:transparent;color:#444}
+  @page{size:A4;margin:20mm}
+}
+
+/* Responsive */
+@media (max-width:900px){main{padding:18px}}
+@media (max-width:600px){.logo{width:48px;height:48px}.tools{flex-wrap:wrap} h1{font-size:1rem}}
