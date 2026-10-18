@@ -24,7 +24,7 @@ document.addEventListener('DOMContentLoaded', () => {
         try {
           await navigator.clipboard.writeText(pageUrl);
           alert('Link copiado para a área de transferência!');
-        } catch (error) {
+        } catch {
           prompt('Copie este link:', pageUrl);
         }
       }
